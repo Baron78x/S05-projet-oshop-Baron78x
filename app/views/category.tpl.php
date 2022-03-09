@@ -1,0 +1,1 @@
+<h1>Page catégorie N°<?= $viewData['categoryId'] ?></h1>
