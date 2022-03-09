@@ -1,6 +1,6 @@
 {
     "require": {
-        "symfony/var-dumper": "^5.4",
+        "symfony/var-dumper": "^6.0",
         "altorouter/altorouter": "^2.0"
     }
 }

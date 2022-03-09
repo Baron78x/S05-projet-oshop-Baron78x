@@ -1,99 +1,104 @@
 <?php
 
-// Point d'entrée unique => FrontController
+// Notre FrontController, point d'entrée UNIQUE de notre application
 
-// On inclut l'autoload de Composer
-// (va permettre d'utiliser les librairies installées avec `composer require`)
-require __DIR__ . '/../vendor/autoload.php';
+// require d'autoload.php pour le chargement automatique des dépendances installées via composer
+require_once __DIR__ . '/../vendor/autoload.php';
 
-// Inclusion de nos classes
-require_once __DIR__ . '/../app/Controllers/MainController.php';
-require_once __DIR__ . '/../app/Controllers/ErrorController.php';
-require_once __DIR__ . '/../app/Controllers/CatalogController.php';
+// require de nos Controllers
+require_once __DIR__ . '/../app/controllers/MainController.php';
+require_once __DIR__ . '/../app/controllers/CatalogController.php';
+require_once __DIR__ . '/../app/controllers/ErrorController.php';
 
-// On instancie AltoRouter
-// @link altorouter.com
+// Nouveau routeur : AltoRouter
+// AltoRouter est un routeur un peu plus "pro" que ce qu'on a fait hier !
+
+// On commence par instancier un objet AltoRouter
 $router = new AltoRouter();
 
-// On doit indiquer à AltoRouter si on travaille dans un sous-dossier
-
-// Le chemin de base, se trouve être le dossier parent du fichier index.php
-// accessible depuis la super-globale PHP $_SERVER (infos liées au serveur et à PHP)
-// /!\ Pas d'espaces ni d'accents dans le nom du dossier
+// on donne à AltoRouter la partie de l'URL à ne pas prendre en compte pour faire la 
+// comparaison entre l'URL demandée par le visiteur (exemple /categoy/1) et l'URL de notre route
+// Si on oublie de mettre ce setBasePath, AltoRouter croit que la route demandée c'est :
+//! /S05/Boson/S05-projet-oShop-bdelphin/public/category/1
+// or en fait, la route correcte c'est juste :
+//* /category/1
 $publicFolder = dirname($_SERVER['SCRIPT_NAME']);
-
+// $_SERVER est une variable superglobale de PHP
+//dump($_SERVER);
+//dump($_SERVER['SCRIPT_NAME']); // retourne /S05/Boson/S05-projet-oShop-bdelphin/public/index.php
+//dump(dirname($_SERVER['SCRIPT_NAME'])); // retourne /S05/Boson/S05-projet-oShop-bdelphin/public
 $router->setBasePath($publicFolder);
+//$router->setBasePath('/S05/Boson/S05-projet-oShop-bdelphin/public');
 
-// On map nos routes
-
-// Home
+// On va ensuite pouvoir mapper nos routes
+// grace à la méthode $router->map() (en suivant la doc !)
 $router->map(
-    // La méthode HTTP
-    'GET',
-    // Route/motif de l'URL
-    '/',
-    // Destination
+    'GET', // premier paramètre : méthode HTTP autorisée
+    '/', // deuxième paramètre : l'URL de cette route
+    // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
-        'controller' => 'MainController',
-        'method' => 'home',
+        'action' => 'home', // méthode à appeler
+        'controller' => 'MainController' // controller concerné
     ],
-    // Nom de la route (pour référence interne à Altorouter)
-    'main_home'
+    'home' // le nom qu'on donne à notre route
 );
 
-// Les produits par catégorie
+// exemple d'une route paramétrique : 
+// on ajoute [i:id] pour avoir un id qui peut changer dans notre URL !
 $router->map(
-    'GET',
-    // Ici on rend dynamique l'URL
-    // /!\ C'est nous qui nommons le paramètre d'URL comme on le souhaite
-    // @link http://altorouter.com/usage/mapping-routes.html
-    '/category/[i:id]',
-    // Destination
+    'GET', // premier paramètre : méthode HTTP autorisée
+    '/category/[i:id]', // deuxième paramètre : l'URL de cette route
+    // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
-        'controller' => 'CatalogController',
-        'method' => 'category',
+        'action' => 'category', // méthode à appeler
+        'controller' => 'CatalogController' // controller concerné
     ],
-    // Nom de la route (pour référence interne à Altorouter)
-    'catalog_category'
+    'category' // le nom qu'on donne à notre route
 );
 
-// Y'a-t-il une correspondance ? (entre la requête et nos routes)
+// le 4ème paramètre / le nom qu'on donne à notre route, nous servira quand on voudra 
+// utiliser $router->generate() (mais on verra ça plus tard !)
+
+// si on veut ajouter une page, il va falloir ajouter un route et donc copier-coller 
+// la méthode map() ci-dessus (exemple si on veut ajouter une page mentions légales) :
+
+$router->map(
+    'GET', // premier paramètre : méthode HTTP autorisée
+    '/mentions-legales', // deuxième paramètre : l'URL de cette route
+    // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
+    [
+        'action' => 'legalMentions', // méthode à appeler
+        'controller' => 'MainController' // controller concerné
+    ],
+    'legal' // le nom qu'on donne à notre route
+);
+
+
+// on vient "matcher" l'URL demandée par le visiteur avec nos routes définies ci-dessus !
 $match = $router->match();
+// $router->match() va retourner false si la route n'existe pas !
+//dump($match);
 
-// dump($match);
-
-// Dispatcher (on appelle la destination demandée)
-
-// Si une correspndance est trouvée ($match !== false)
+// est-ce que notre route existe ? 
 if($match) {
+    // notre route existe, on va récupérer les données de la route 
+    // que l'on a définit précédemment avec $router->map()
 
-    // On va chercher le contrôleur et la méthode à appeler depuis le tableau de routes
-    // Pour la page demandée
+    // on récupère le controller
+    $controllerName= $match['target']['controller'];
 
-    // Le tableau de destination se trouve dans $match['target']
-    // $match = [
-    //   "target" => [
-    //     "controller" => "MainController"
-    //     "method" => "home"
-    //   ]
-    //   "params" => [
-    //     "id" => "3"
-    //   ]
-    // ]
-    $controllerName = $match['target']['controller'];
-    $methodName = $match['target']['method'];
+    // on récupère la méthode
+    $method = $match['target']['action'];
 
-    // Instanciation de la classe MainController
-    // Dynamiquement...
+    // on peut instancier notre controller
     $controller = new $controllerName();
-    // Appel de la méthode correspondant à ce point d'entrée (page)
-    // /!\ On appelle la méthode qui correspond au contenu de la variable $methodName
-    // /!\ On en profite pour transmettre les paramètres d'URL reçus d'AltoRouter
-    $controller->$methodName($match['params']);
 
+    // on peut appeler la méthode de notre controller
+    // on va envoyer les paramètres éventuels à notre méthode
+    // ces paramètres étant ceux définis avec $router->map() ci dessus ! [i:id]
+    $controller->$method($match['params']);
 } else {
-
+    // notre route n'existe pas, donc on renvoit sur une 404 !
     $controller = new ErrorController();
     $controller->error404();
-
 }
