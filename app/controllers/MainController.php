@@ -11,6 +11,11 @@ class MainController
         $this->show('home');
     }
 
+    public function legalMentions()
+    {
+        $this->show('legal');
+    }
+
     // méthode show : pour afficher nos templates
     private function show($viewName, $viewData = [])
     {

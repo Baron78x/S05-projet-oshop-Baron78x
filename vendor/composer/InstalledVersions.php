@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '84b38d8fdea7bcacd60143a241f178ab302f1a42',
+    'reference' => '04a1b671f8b0d6fb9377aeb9d3df9317e70e166a',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,16 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '84b38d8fdea7bcacd60143a241f178ab302f1a42',
+      'reference' => '04a1b671f8b0d6fb9377aeb9d3df9317e70e166a',
+    ),
+    'altorouter/altorouter' => 
+    array (
+      'pretty_version' => '2.0.2',
+      'version' => '2.0.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f6fede4f94ced7c22ba63a9b8af0bf2dc38e3cb2',
     ),
     'symfony/polyfill-mbstring' => 
     array (
