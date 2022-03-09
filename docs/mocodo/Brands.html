@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+  #mld .relation { font-variant: small-caps; font-weight: bold }
+  #mld .primary { text-decoration: underline }
+  #mld .foreign { font-style: oblique }
+  #mld .normal { }
+</style>
+</head>
+<body>
+<div id='mld'>
+<div>
+  <span class='relation'>BRAND</span> (
+    <span class='primary'>brand code</span>,
+    <span class='normal'>brand name</span>
+  )
+</div>
+<div>
+  <span class='relation'>TYPE</span> (
+    <span class='primary'>type code</span>,
+    <span class='normal'>type name</span>
+  )
+</div>
+<div>
+  <span class='relation'>PRODUCT</span> (
+    <span class='primary'>product code</span>,
+    <span class='normal'>product name</span>,
+    <span class='normal'>description</span>,
+    <span class='normal'>product picture</span>,
+    <span class='normal'>price</span>,
+    <span class='normal'>rating</span>,
+    <span class='normal'>status</span>,
+    <span class='foreign'>type code</span>,
+    <span class='foreign'>brand code</span>,
+    <span class='foreign'>category code</span>
+  )
+</div>
+<div>
+  <span class='relation'>CATEGORY</span> (
+    <span class='primary'>category code</span>,
+    <span class='normal'>category name</span>,
+    <span class='normal'>subtitle</span>,
+    <span class='normal'>category picture</span>,
+    <span class='normal'>home order</span>
+  )
+</div>
+</div>
+</body>
+</html>

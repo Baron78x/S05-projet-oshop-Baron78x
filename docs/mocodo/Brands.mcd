@@ -1,0 +1,11 @@
+BRAND: brand code, brand name
+is made by, 11 PRODUCT, 0N BRAND
+TYPE: type code, type name
+
+:
+PRODUCT: product code, product name, description, product picture, price, rating, status
+is type of, 11 PRODUCT, 0N TYPE
+
+CATEGORY: category code, category name, subtitle, category picture, home order
+is categorised as, 01 PRODUCT, 0N CATEGORY
+:
