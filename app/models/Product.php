@@ -297,12 +297,13 @@ class Product
 
     /**
      * find() permet de récupérer un produit spécifique par son id
-     *
+     * 
      * @param Integer id du produit à récupérer
      * @return Product
      */
-    public function find($id){
-        // requete sql
+    public function find($id)
+    {
+        // notre requête SQL
         $sql = "SELECT * FROM `product` WHERE id = {$id}";
 
         // on récupère notre connexion à la BDD
@@ -311,9 +312,10 @@ class Product
         // on récupère un pdo statement avec $pdo->query($sql)
         $pdoStmt = $pdo->query($sql);
 
+        // pour récupérer un seul objet de type Product, on utilise 
+        // la méthode fetchObject() de PDO !
         $result = $pdoStmt->fetchObject('Product');
 
         return $result;
-
     }
 }

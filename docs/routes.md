@@ -4,12 +4,9 @@
 
 | URL | HTTP Method | Controller | Method | Title | Content | Comment |
 |--|--|--|--|--|--|--|
-| `/` | `GET` | `MainController` | `home` | Dans les shoe | 5 categories | - |
-| `/public-url/with-sub-folder/[and-dynamic-part]` | `GET` ou `POST` | `ControllerName` | `methodName` | Titre de la page | Description of page's content | Explain here the dynamics parts of your URL (`[]`) |
 | `/` | `GET` | `MainController` | `home` | Page d'accueil | Page d'accueil avec les 5 catégories | - |
+| `/mentions-legales/` | `GET` | `MainController` | `legal` | Page mentions légales | Mentions légales du site, RGPD | - |
 | `/catalogue/categorie/[id]` | `GET` | `CatalogController` | `category` | Page de catégorie | Page listant les produits d'une catégorie | `[id]` correspond à l'identifiant de la catégorie |
-| `/mentions-legales` | `GET` | `MainController` | `legalMention` | Page Mention légales | - | - |
-| `/catalogue/categorie/[id]` | `GET` | `CatalogController` | `category` | Page de catégorie 12 | Page listant les produits d'une catégorie | `[id]` correspond à l'identifiant de la catégorie |
-| `/catalogue/type/[id]` | `GET` | `CatalogController` | `type` | Page de type | Page listant les produits d'un type | `[id]` correspond à l'identifiant du type |
-| `/catalogue/marque/[id]` | `GET` | `CatalogController` | `marque` | Page de marque | Page listant les produits d'une marque | `[id]` correspond à l'identifiant de la marque |
-| `/catalogue/produit/[id]` | `GET` | `CatalogController` | `produit` | Page de produit | Page listant les produits d'un produit | `[id]` correspond à l'identifiant du produit |
+| `/catalogue/type/[id]` | `GET` | `CatalogController` | `type` | Page de type de produit | Page listant les produits d'un certain type | `[id]` correspond à l'identifiant du type de produit |
+| `/catalogue/marque/[id]` | `GET` | `CatalogController` | `brand` | Page de marque | Page listant les produits d'une marque | `[id]` correspond à l'identifiant de la marque |
+| `/catalogue/produit/[id]` | `GET` | `CatalogController` | `product` | Page produit | Page affichant les détails d'un produit | `[id]` correspond à l'identifiant du produit |

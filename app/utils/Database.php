@@ -1,7 +1,7 @@
 <?php
 
-// Pour se servir de cet "utilitaire" Database.php, on va utiliser :
-// $pdo = Database::getPDO();
+// Pour se servir de cet "utilitaire" Database.php, on va utiliser : 
+// $pdo = Database::getPDO()
 
 // Design Pattern : Singleton (on vous en parlera en S06 !)
 class Database

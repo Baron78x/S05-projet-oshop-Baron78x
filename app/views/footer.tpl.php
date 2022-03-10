@@ -1,4 +1,4 @@
-<footer class="main-footer">
+  <footer class="main-footer">
     <!-- Services block-->
     <div id="footer-services" class="py-5">
       <div class="container">
