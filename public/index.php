@@ -5,6 +5,9 @@
 // require d'autoload.php pour le chargement automatique des dépendances installées via composer
 require_once __DIR__ . '/../vendor/autoload.php';
 
+// inclusion de app/utils/Database.php
+require_once __DIR__ . '/../app/utils/Database.php';
+
 // require de nos Controllers
 require_once __DIR__ . '/../app/controllers/MainController.php';
 require_once __DIR__ . '/../app/controllers/CatalogController.php';
@@ -25,8 +28,8 @@ $router = new AltoRouter();
 $publicFolder = dirname($_SERVER['SCRIPT_NAME']);
 // $_SERVER est une variable superglobale de PHP
 //dump($_SERVER);
-//dump($_SERVER['SCRIPT_NAME']); // retourne /S05/Boson/S05-projet-oShop-bdelphin/public/index.php
-//dump(dirname($_SERVER['SCRIPT_NAME'])); // retourne /S05/Boson/S05-projet-oShop-bdelphin/public
+//dump($_SERVER['SCRIPT_NAME']); // retourne /S05/Boson/S05-projet-oshop-bdelphin/public/index.php
+//dump(dirname($_SERVER['SCRIPT_NAME'])); // retourne /S05/Boson/S05-projet-oshop-bdelphin/public
 $router->setBasePath($publicFolder);
 //$router->setBasePath('/S05/Boson/S05-projet-oShop-bdelphin/public');
 
@@ -47,13 +50,46 @@ $router->map(
 // on ajoute [i:id] pour avoir un id qui peut changer dans notre URL !
 $router->map(
     'GET', // premier paramètre : méthode HTTP autorisée
-    '/category/[i:id]', // deuxième paramètre : l'URL de cette route
+    '/catalogue/categorie/[i:id]', // deuxième paramètre : l'URL de cette route
     // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
         'action' => 'category', // méthode à appeler
         'controller' => 'CatalogController' // controller concerné
     ],
     'category' // le nom qu'on donne à notre route
+);
+
+$router->map(
+    'GET', // premier paramètre : méthode HTTP autorisée
+    '/catalogue/marque/[i:id]', // deuxième paramètre : l'URL de cette route
+    // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
+    [
+        'action' => 'brand', // méthode à appeler
+        'controller' => 'CatalogController' // controller concerné
+    ],
+    'brand' // le nom qu'on donne à notre route
+);
+
+$router->map(
+    'GET', // premier paramètre : méthode HTTP autorisée
+    '/catalogue/type/[i:id]', // deuxième paramètre : l'URL de cette route
+    // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
+    [
+        'action' => 'type', // méthode à appeler
+        'controller' => 'CatalogController' // controller concerné
+    ],
+    'type' // le nom qu'on donne à notre route
+);
+
+$router->map(
+    'GET', // premier paramètre : méthode HTTP autorisée
+    '/catalogue/produit/[i:id]', // deuxième paramètre : l'URL de cette route
+    // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
+    [
+        'action' => 'product', // méthode à appeler
+        'controller' => 'CatalogController' // controller concerné
+    ],
+    'product' // le nom qu'on donne à notre route
 );
 
 // le 4ème paramètre / le nom qu'on donne à notre route, nous servira quand on voudra 
@@ -67,7 +103,7 @@ $router->map(
     '/mentions-legales', // deuxième paramètre : l'URL de cette route
     // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
-        'action' => 'legalMentions', // méthode à appeler
+        'action' => 'legal', // méthode à appeler
         'controller' => 'MainController' // controller concerné
     ],
     'legal' // le nom qu'on donne à notre route

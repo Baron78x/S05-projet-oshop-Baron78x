@@ -1,0 +1,1 @@
+<h1>Page marque N°<?= $viewData['brandId'] ?></h1>

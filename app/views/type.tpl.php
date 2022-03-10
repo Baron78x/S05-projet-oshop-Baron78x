@@ -1,0 +1,1 @@
+<h1>Page type de produit N°<?= $viewData['typeId'] ?></h1>

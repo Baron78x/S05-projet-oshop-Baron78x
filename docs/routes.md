@@ -4,6 +4,12 @@
 
 | URL | HTTP Method | Controller | Method | Title | Content | Comment |
 |--|--|--|--|--|--|--|
-| `/` | `GET` | `MainController` | `home()` | oShop | 5 categories | - |
-| `/mentions-legales` | `GET` | `MainController` | `legalNotice()` | Legal notice | - | - |
-| `/catalogue/categorie/[id]` | `GET` | `CatalogController` | `category()` | Category name | Display products for the given category | id = identifier of the category to display |
+| `/` | `GET` | `MainController` | `home` | Dans les shoe | 5 categories | - |
+| `/public-url/with-sub-folder/[and-dynamic-part]` | `GET` ou `POST` | `ControllerName` | `methodName` | Titre de la page | Description of page's content | Explain here the dynamics parts of your URL (`[]`) |
+| `/` | `GET` | `MainController` | `home` | Page d'accueil | Page d'accueil avec les 5 catégories | - |
+| `/catalogue/categorie/[id]` | `GET` | `CatalogController` | `category` | Page de catégorie | Page listant les produits d'une catégorie | `[id]` correspond à l'identifiant de la catégorie |
+| `/mentions-legales` | `GET` | `MainController` | `legalMention` | Page Mention légales | - | - |
+| `/catalogue/categorie/[id]` | `GET` | `CatalogController` | `category` | Page de catégorie 12 | Page listant les produits d'une catégorie | `[id]` correspond à l'identifiant de la catégorie |
+| `/catalogue/type/[id]` | `GET` | `CatalogController` | `type` | Page de type | Page listant les produits d'un type | `[id]` correspond à l'identifiant du type |
+| `/catalogue/marque/[id]` | `GET` | `CatalogController` | `marque` | Page de marque | Page listant les produits d'une marque | `[id]` correspond à l'identifiant de la marque |
+| `/catalogue/produit/[id]` | `GET` | `CatalogController` | `produit` | Page de produit | Page listant les produits d'un produit | `[id]` correspond à l'identifiant du produit |

@@ -1,4 +1,4 @@
-  <section>
+<section>
     <div class="container-fluid">
       <div class="row mx-0">
         <div class="col-md-6">
