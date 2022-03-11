@@ -8,12 +8,11 @@
  * qui va nous permettre d'interragir avec notre 
  * table product en BDD.
  */
-class Product
+class Product extends CoreModel
 {
 
     // 1ère chose à mettre dans le modèle :
     // autant de propriétés (en private) que l'on a de colonnes
-    private $id;
     private $name;
     private $description;
     private $picture;
@@ -27,23 +26,11 @@ class Product
      */
     private $status;
 
-    private $created_at;
-    private $updated_at;
     private $brand_id;
     private $category_id;
     private $type_id;
 
-    // 2ème chose à mettre : les getters & les setters
-
-    /**
-     * Get the value of id
-     * 
-     * @return Integer Id du produit
-     */ 
-    public function getId()
-    {
-        return $this->id;
-    }
+    // 2ème chose à mettre en place : les getters & les setters
 
     /**
      * Get the value of name
@@ -164,46 +151,6 @@ class Product
     public function setStatus($status)
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of created_at
-     */ 
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * Set the value of created_at
-     *
-     * @return  self
-     */ 
-    public function setCreatedAt($created_at)
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of updated_at
-     */ 
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
-    }
-
-    /**
-     * Set the value of updated_at
-     *
-     * @return  self
-     */ 
-    public function setUpdatedAt($updated_at)
-    {
-        $this->updated_at = $updated_at;
 
         return $this;
     }

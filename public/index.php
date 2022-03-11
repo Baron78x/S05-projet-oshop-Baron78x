@@ -109,11 +109,26 @@ $router->map(
     'legal' // le nom qu'on donne à notre route
 );
 
+// route pour tester notre nouveau modèle Category !
+$router->map(
+    'GET', // premier paramètre : méthode HTTP autorisée
+    '/test', // deuxième paramètre : l'URL de cette route
+    // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
+    [
+        'action' => 'test', // méthode à appeler
+        'controller' => 'MainController' // controller concerné
+    ],
+    'test' // le nom qu'on donne à notre route
+);
+
 
 // on vient "matcher" l'URL demandée par le visiteur avec nos routes définies ci-dessus !
 $match = $router->match();
 // $router->match() va retourner false si la route n'existe pas !
 //dump($match);
+
+//dump($router->generate('category', ['id' => 5]));
+//dump($router->generate('legal'));
 
 // est-ce que notre route existe ? 
 if($match) {
