@@ -6,12 +6,15 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // inclusion de app/utils/Database.php
-require_once __DIR__ . '/../app/utils/Database.php';
+//require_once __DIR__ . '/../app/utils/Database.php';
+
+//use AltoRouter;
 
 // require de nos Controllers
-require_once __DIR__ . '/../app/controllers/MainController.php';
-require_once __DIR__ . '/../app/controllers/CatalogController.php';
-require_once __DIR__ . '/../app/controllers/ErrorController.php';
+// require_once __DIR__ . '/../app/controllers/CoreController.php';
+// require_once __DIR__ . '/../app/controllers/MainController.php';
+// require_once __DIR__ . '/../app/controllers/CatalogController.php';
+// require_once __DIR__ . '/../app/controllers/ErrorController.php';
 
 // Nouveau routeur : AltoRouter
 // AltoRouter est un routeur un peu plus "pro" que ce qu'on a fait hier !
@@ -41,7 +44,7 @@ $router->map(
     // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
         'action' => 'home', // méthode à appeler
-        'controller' => 'MainController' // controller concerné
+        'controller' => 'Oshop\controllers\MainController' // controller concerné
     ],
     'home' // le nom qu'on donne à notre route
 );
@@ -54,7 +57,7 @@ $router->map(
     // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
         'action' => 'category', // méthode à appeler
-        'controller' => 'CatalogController' // controller concerné
+        'controller' => 'Oshop\controllers\CatalogController' // controller concerné
     ],
     'category' // le nom qu'on donne à notre route
 );
@@ -65,7 +68,7 @@ $router->map(
     // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
         'action' => 'brand', // méthode à appeler
-        'controller' => 'CatalogController' // controller concerné
+        'controller' => 'Oshop\controllers\CatalogController' // controller concerné
     ],
     'brand' // le nom qu'on donne à notre route
 );
@@ -76,7 +79,7 @@ $router->map(
     // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
         'action' => 'type', // méthode à appeler
-        'controller' => 'CatalogController' // controller concerné
+        'controller' => 'Oshop\controllers\CatalogController' // controller concerné
     ],
     'type' // le nom qu'on donne à notre route
 );
@@ -87,7 +90,7 @@ $router->map(
     // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
         'action' => 'product', // méthode à appeler
-        'controller' => 'CatalogController' // controller concerné
+        'controller' => 'Oshop\controllers\CatalogController' // controller concerné
     ],
     'product' // le nom qu'on donne à notre route
 );
@@ -104,22 +107,33 @@ $router->map(
     // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
         'action' => 'legal', // méthode à appeler
-        'controller' => 'MainController' // controller concerné
+        'controller' => 'Oshop\controllers\MainController' // controller concerné
     ],
     'legal' // le nom qu'on donne à notre route
 );
 
-// route pour tester notre nouveau modèle Category !
 $router->map(
     'GET', // premier paramètre : méthode HTTP autorisée
-    '/test', // deuxième paramètre : l'URL de cette route
+    '/cgv', // deuxième paramètre : l'URL de cette route
     // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
     [
-        'action' => 'test', // méthode à appeler
-        'controller' => 'MainController' // controller concerné
+        'action' => 'cgv', // méthode à appeler
+        'controller' => 'Oshop\controllers\MainController' // controller concerné
     ],
-    'test' // le nom qu'on donne à notre route
+    'cgv' // le nom qu'on donne à notre route
 );
+
+// route pour tester notre nouveau modèle Category !
+// $router->map(
+//     'GET', // premier paramètre : méthode HTTP autorisée
+//     '/test', // deuxième paramètre : l'URL de cette route
+//     // troisième paramètre : cible/target de notre route (une méthode dans un controlleur)
+//     [
+//         'action' => 'test', // méthode à appeler
+//         'controller' => 'MainController' // controller concerné
+//     ],
+//     'test' // le nom qu'on donne à notre route
+// );
 
 
 // on vient "matcher" l'URL demandée par le visiteur avec nos routes définies ci-dessus !
@@ -150,6 +164,6 @@ if($match) {
     $controller->$method($match['params']);
 } else {
     // notre route n'existe pas, donc on renvoit sur une 404 !
-    $controller = new ErrorController();
+    $controller = new Oshop\controllers\ErrorController();
     $controller->error404();
 }

@@ -1,5 +1,9 @@
 <?php
 
+namespace Oshop\utils;
+
+use PDO;
+
 // Pour se servir de cet "utilitaire" Database.php, on va utiliser : 
 // $pdo = Database::getPDO()
 

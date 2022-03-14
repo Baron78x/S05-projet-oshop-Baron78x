@@ -1,5 +1,13 @@
 <?php
 
+namespace Oshop\models;
+
+// on va utiliser Database, donc :
+use Oshop\utils\Database;
+
+// on a aussi besoin de PDO, donc :
+use PDO;
+
 // On suit le pattern Active Record :
 // une table dans la BDD -> une classe/un modèle
 
@@ -236,7 +244,7 @@ class Product extends CoreModel
         $pdoStmt = $pdo->query($sql);
 
         // https://kourou.oclock.io/content/uploads/2020/11/fetch-fetchall.png
-        $results = $pdoStmt->fetchAll(PDO::FETCH_CLASS, 'Product');
+        $results = $pdoStmt->fetchAll(PDO::FETCH_CLASS, 'Oshop\models\Product');
 
         // il ne nous reste plus qu'à ... retourner ce tableau results !
         return $results;
@@ -261,7 +269,7 @@ class Product extends CoreModel
 
         // pour récupérer un seul objet de type Product, on utilise 
         // la méthode fetchObject() de PDO !
-        $result = $pdoStmt->fetchObject('Product');
+        $result = $pdoStmt->fetchObject('Oshop\models\Product');
 
         return $result;
     }

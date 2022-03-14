@@ -1,5 +1,10 @@
 <?php 
 
+namespace Oshop\models;
+
+use Oshop\utils\Database;
+use PDO;
+
 // le model Category hérite de la classe mère CoreModel
 // (et donc hérite de ses propriétés & méthodes !)
 class Category extends CoreModel
@@ -110,7 +115,7 @@ class Category extends CoreModel
         $pdoStmt = $pdo->query($sql);
 
         // https://kourou.oclock.io/content/uploads/2020/11/fetch-fetchall.png
-        $results = $pdoStmt->fetchAll(PDO::FETCH_CLASS, 'Category');
+        $results = $pdoStmt->fetchAll(PDO::FETCH_CLASS, 'Oshop\models\Category');
 
         // il ne nous reste plus qu'à ... retourner ce tableau results !
         return $results;
@@ -135,7 +140,7 @@ class Category extends CoreModel
 
         // pour récupérer un seul objet de type Product, on utilise 
         // la méthode fetchObject() de PDO !
-        $result = $pdoStmt->fetchObject('Category');
+        $result = $pdoStmt->fetchObject('Oshop\models\Category');
 
         return $result;
     }

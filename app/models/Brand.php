@@ -1,5 +1,10 @@
 <?php
 
+namespace Oshop\models;
+
+use Oshop\utils\Database;
+use PDO;
+
 class Brand extends CoreModel
 {
     private $name;
@@ -42,7 +47,26 @@ class Brand extends CoreModel
         $pdoStmt = $pdo->query($sql);
 
         // https://kourou.oclock.io/content/uploads/2020/11/fetch-fetchall.png
-        $results = $pdoStmt->fetchAll(PDO::FETCH_CLASS, 'Brand');
+        $results = $pdoStmt->fetchAll(PDO::FETCH_CLASS, 'Oshop\models\Brand');
+
+        // il ne nous reste plus qu'à ... retourner ce tableau results !
+        return $results;
+    }
+
+    public function findAllOrderedByNameAsc()
+    {
+        // notre requête SQL
+        $sql = "SELECT * FROM `brand` ORDER BY `name`";
+
+        // on récupère notre connexion à la BDD
+        $pdo = Database::getPDO();
+
+        // https://kourou.oclock.io/content/uploads/2020/11/query-exec.png
+        // on récupère un pdo statement avec $pdo->query($sql)
+        $pdoStmt = $pdo->query($sql);
+
+        // https://kourou.oclock.io/content/uploads/2020/11/fetch-fetchall.png
+        $results = $pdoStmt->fetchAll(PDO::FETCH_CLASS, 'Oshop\models\Brand');
 
         // il ne nous reste plus qu'à ... retourner ce tableau results !
         return $results;
@@ -67,7 +91,7 @@ class Brand extends CoreModel
 
         // pour récupérer un seul objet de type Product, on utilise 
         // la méthode fetchObject() de PDO !
-        $result = $pdoStmt->fetchObject('Brand');
+        $result = $pdoStmt->fetchObject('Oshop\models\Brand');
 
         return $result;
     }

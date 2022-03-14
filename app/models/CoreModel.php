@@ -1,5 +1,7 @@
 <?php
 
+namespace Oshop\models;
+
 // CoreModel est notre classe mère / parente
 // Tous nos modèles vont hériter de cette classe !
 class CoreModel
